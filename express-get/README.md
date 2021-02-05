@@ -1,41 +1,23 @@
-## Add the layout file
+## Route parameter
 
-### We create a layout file in views/layout.hbs
+#### http://localhost:3000/movies/star%wars 
 
-### In the body we reference the {{{ body }}}
-
- ```html
- // layout.hbs
-<body>
-
-   <h1>this is the movies app</h1>
-   {{{ body }}} 
-
-</body>
- ```
-
-## Adding partials 
-
-### To be able to use partials add these lines to app.js
+#### Access it in Express
 ```js
 // app.js
-const handlebars = require('hbs');
-handlebars.registerPartials(__dirname + '/views/partials');
+app.get('/movies/:title, (req, res) => {
+    console.log(req.params.title)
+})
 ```
 
-### Create the partials folder in /views and then add the partial movieCard
+## Query String
 
-### To use the movieCard partial in movies.hbs
-```html
-<h1>Movies</h1>
-{{#each moviesList}}
-    {{> movieCard this}}
-{{/each}}
-```
+#### http://localhost:3000/movies?title=star%wars
 
-### To use it also in movieDetails.hbs
-
-```html
-<h2>Details for {{clickedMovie.title}}</h2>
-{{> movieCard clickedMovie }}
+#### Access it in Express
+```js
+// app.js
+app.get('/movies, (req, res) => {
+    console.log(req.query.title)
+})
 ```
